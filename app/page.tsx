@@ -2,16 +2,35 @@
 
 import { useState } from "react";
 
+type Group = { name: string; description: string; privacy: string };
+
 export default function Home() {
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [groupOpen, setGroupOpen] = useState(false);
+  const [groupName, setGroupName] = useState("");
+  const [groupDescription, setGroupDescription] = useState("");
+  const [groupPrivacy, setGroupPrivacy] = useState("Public");
+  const [groups, setGroups] = useState<Group[]>([]);
+  const [groupNotice, setGroupNotice] = useState("");
+
+  function createGroup(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!groupName.trim()) return;
+    setGroups((current) => [...current, { name: groupName.trim(), description: groupDescription.trim(), privacy: groupPrivacy }]);
+    setGroupNotice("Your group has been added to this preview. Sign-in and server storage will be connected before launch.");
+    setGroupName("");
+    setGroupDescription("");
+    setGroupPrivacy("Public");
+    setGroupOpen(false);
+  }
 
   return (
     <main>
       <header className="site-header">
         <a className="brand" href="#" aria-label="IchaMeet home">icha<span>meet</span></a>
         <nav className="nav" aria-label="Main navigation">
-          <a href="#how">How it works</a><a href="#features">Why IchaMeet</a><a href="#safety">Safety</a>
+          <a href="#how">How it works</a><a href="#features">Why IchaMeet</a><a href="#groups">Groups</a><a href="#safety">Safety</a>
         </nav>
         <div className="nav-actions"><button className="btn btn-light" onClick={() => setOpen(true)}>Log in</button><button className="btn btn-primary" onClick={() => setOpen(true)}>Join free</button></div>
       </header>
@@ -40,6 +59,19 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section section-soft" id="groups">
+        <div className="section-heading"><span className="eyebrow">Find your people</span><h2>Community groups on IchaMeet</h2><p>Create a group around your interests, hobbies, culture, or shared experiences. Meet people through conversation and common interests.</p></div>
+        <div className="group-actions"><button className="btn btn-primary" onClick={() => { setGroupNotice(""); setGroupOpen(true); }}>＋ Create a group</button></div>
+        {groupNotice && <p className="group-notice" role="status">{groupNotice}</p>}
+        <div className="group-grid">
+          <article className="group-card"><div className="group-symbol">🌍</div><h3>Travel & Discovery</h3><p>Share places to visit and stories from around the world.</p><span>Community idea</span></article>
+          <article className="group-card"><div className="group-symbol">🎵</div><h3>Music Lovers</h3><p>Meet people who enjoy discovering and discussing music.</p><span>Community idea</span></article>
+          <article className="group-card"><div className="group-symbol">📚</div><h3>Books & Conversation</h3><p>Talk about books, learning, and ideas that inspire you.</p><span>Community idea</span></article>
+          {groups.map((group, index) => <article className="group-card created-group" key={index}><div className="group-symbol">💬</div><h3>{group.name}</h3><p>{group.description || "A new IchaMeet community."}</p><span>{group.privacy} · Preview group</span></article>)}
+        </div>
+        <p className="group-footnote">Group creation is currently a front-end preview. Accounts, member invitations, group posts, and persistent storage are still to be built.</p>
+      </section>
+
       <section className="section section-soft" id="how">
         <div className="section-heading"><span className="eyebrow">Your journey</span><h2>Three simple steps</h2><p>A clear path from first hello to a genuine connection.</p></div>
         <div className="steps">
@@ -66,6 +98,20 @@ export default function Home() {
             <label htmlFor="email">Email address</label><input id="email" type="email" placeholder="you@example.com" autoComplete="email"/>
             <button className="btn btn-primary" onClick={() => setSubmitted(true)}>Continue</button>
           </>}
+        </section>
+      </div>}
+
+      {groupOpen && <div className="modal-backdrop" role="presentation" onMouseDown={(e) => { if (e.target === e.currentTarget) setGroupOpen(false); }}>
+        <section className="modal" role="dialog" aria-modal="true" aria-labelledby="group-title">
+          <button className="close" aria-label="Close" onClick={() => setGroupOpen(false)}>×</button>
+          <h2 id="group-title">Create a community group</h2>
+          <p>Start a space for people with a shared interest. Please keep groups respectful and welcoming.</p>
+          <form onSubmit={createGroup}>
+            <label htmlFor="group-name">Group name</label><input id="group-name" value={groupName} onChange={(e) => setGroupName(e.target.value)} maxLength={50} required placeholder="e.g. Hiking & Nature"/>
+            <label htmlFor="group-description">Description</label><textarea id="group-description" value={groupDescription} onChange={(e) => setGroupDescription(e.target.value)} maxLength={240} rows={3} placeholder="What is this group about?"/>
+            <label htmlFor="group-privacy">Who can discover this group?</label><select id="group-privacy" value={groupPrivacy} onChange={(e) => setGroupPrivacy(e.target.value)}><option>Public</option><option>Private</option></select>
+            <button className="btn btn-primary" type="submit">Create group</button>
+          </form>
         </section>
       </div>}
     </main>
