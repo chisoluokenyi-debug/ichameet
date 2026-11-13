@@ -6,7 +6,6 @@ type Group = { name: string; description: string; privacy: string };
 
 export default function Home() {
   const [open, setOpen] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const [groupOpen, setGroupOpen] = useState(false);
   const [groupName, setGroupName] = useState("");
   const [groupDescription, setGroupDescription] = useState("");
@@ -32,7 +31,7 @@ export default function Home() {
         <nav className="nav" aria-label="Main navigation">
           <a href="#how">How it works</a><a href="#features">Why IchaMeet</a><a href="#groups">Groups</a><a href="#safety">Safety</a>
         </nav>
-        <div className="nav-actions"><button className="btn btn-light" onClick={() => setOpen(true)}>Log in</button><button className="btn btn-primary" onClick={() => setOpen(true)}>Join free</button></div>
+        <div className="nav-actions"><button className="btn btn-light" onClick={() => { window.location.href = "/signup"; }}>Log in</button><button className="btn btn-primary" onClick={() => { window.location.href = "/signup"; }}>Join free</button></div>
       </header>
 
       <section className="hero">
@@ -40,7 +39,7 @@ export default function Home() {
           <span className="eyebrow">A world of possibilities</span>
           <h1>Real connections.<br/><em>Meaningful</em> beginnings.</h1>
           <p className="hero-copy">Meet interesting people, share your story, and discover connections that could become something beautiful. Your next chapter could start here.</p>
-          <div className="hero-buttons"><button className="btn btn-primary" onClick={() => setOpen(true)}>Create your account <span aria-hidden="true">→</span></button><a className="btn btn-light" href="#how">Discover how it works</a></div>
+          <div className="hero-buttons"><button className="btn btn-primary" onClick={() => { window.location.href = "/signup"; }}>Create your account <span aria-hidden="true">→</span></button><a className="btn btn-light" href="#how">Discover how it works</a></div>
           <p className="hero-note">Designed for adults 18+ • Connect respectfully • Meet the world</p>
         </div>
         <div className="visual" aria-label="Abstract illustration representing two people connecting">
@@ -85,7 +84,7 @@ export default function Home() {
         <div className="section-heading"><span className="eyebrow">Trust matters</span><h2>A better experience starts with safety</h2><p>The full platform will include adult-only registration, privacy controls, reporting and blocking, moderation, and clear community rules before public launch.</p></div>
       </section>
 
-      <section className="cta"><h2>Your story could start with hello.</h2><p>Join IchaMeet as we build a new way to make meaningful connections.</p><button className="btn btn-light" onClick={() => setOpen(true)}>Get started</button></section>
+      <section className="cta"><h2>Your story could start with hello.</h2><p>Join IchaMeet as we build a new way to make meaningful connections.</p><button className="btn btn-light" onClick={() => { window.location.href = "/signup"; }}>Get started</button></section>
 
       <footer className="site-footer"><a className="brand" href="#">icha<span>meet</span></a><span>© {new Date().getFullYear()} IchaMeet. Built for respectful connections.</span><span>Adults 18+ only</span></footer>
 
