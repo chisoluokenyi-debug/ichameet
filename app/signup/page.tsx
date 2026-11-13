@@ -7,14 +7,13 @@ import { createClient } from "@/lib/supabase/client";
 
 export default function SignupPage() {
   const router = useRouter();
-  const params = useSearchParams();
   const [mode, setMode] = useState<"signup" | "login">("signup");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [adult, setAdult] = useState(false);
   const [busy, setBusy] = useState(false);
-  const [notice, setNotice] = useState(params.get("message") === "verification-failed" ? "Email verification could not be completed. Please try again." : "");
+  const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
 
   async function submit(event: FormEvent<HTMLFormElement>) {
