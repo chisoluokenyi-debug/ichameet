@@ -115,3 +115,43 @@ button,input{font:inherit}
 .comment-form{display:flex;gap:8px;margin-top:12px}
 .comment-form input{min-width:0;flex:1;border:1px solid #e7dce2;border-radius:12px;padding:11px}
 .comment-form .btn{margin:0;white-space:nowrap}
+
+/* Chat and calling preview */
+.chat-page{min-height:100vh;background:#fff9fb}
+.chat-preview-label{font-size:12px;color:var(--muted);font-weight:700}
+.chat-shell{max-width:1280px;height:calc(100vh - 110px);min-height:620px;margin:24px auto;padding:0 20px;display:grid;grid-template-columns:310px minmax(0,1fr);gap:16px}
+.chat-contacts,.chat-conversation{background:#fff;border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.chat-contacts{padding:22px}
+.chat-contacts h1{font:700 28px 'Playfair Display',serif;margin:0 0 20px}
+.chat-contacts>input{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;margin-bottom:16px}
+.chat-contact{width:100%;display:flex;align-items:center;gap:12px;padding:13px;border:0;background:#fff1f5;border-radius:14px;text-align:left;cursor:pointer;color:var(--ink)}
+.chat-avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#f5b6c9,#81537f);color:#fff;font-weight:800;flex:none}
+.chat-avatar.large{width:46px;height:46px}
+.chat-contact>span:nth-child(2){display:grid;gap:4px;min-width:0}
+.chat-contact small{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-contact i{margin-left:auto;color:var(--muted);font-size:11px;font-style:normal}
+.chat-preview-note{font-size:12px;line-height:1.6;color:var(--muted);margin-top:20px}
+.chat-conversation{display:flex;flex-direction:column;min-width:0}
+.chat-person{padding:17px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:15px}
+.chat-person-info{display:flex;align-items:center;gap:12px}
+.chat-person-info div{display:grid;gap:4px}
+.chat-person-info small{color:var(--muted);font-size:12px}
+.call-actions{display:flex;gap:8px}
+.call-button{border:1px solid var(--line);background:#fff8fa;border-radius:13px;padding:9px 12px;color:var(--plum);cursor:pointer;display:flex;align-items:center;gap:8px}
+.call-button span{font-size:18px}
+.call-button small{font-size:12px;font-weight:700}
+.chat-messages{flex:1;overflow:auto;padding:24px;display:flex;flex-direction:column;gap:14px}
+.chat-date{text-align:center;color:#a99ca8;font-size:10px;letter-spacing:1.4px;font-weight:700;margin-bottom:8px}
+.message-row{display:flex;justify-content:flex-start}
+.message-row.mine{justify-content:flex-end}
+.message-bubble{max-width:min(75%,480px);padding:12px 15px;border-radius:17px 17px 17px 5px;background:#fff1f5;color:var(--ink)}
+.message-row.mine .message-bubble{background:#66365f;color:#fff;border-radius:17px 17px 5px 17px}
+.message-bubble p{margin:0;line-height:1.55;white-space:pre-wrap}
+.message-bubble small{display:block;text-align:right;margin-top:6px;font-size:10px;opacity:.65}
+.chat-compose{display:flex;gap:10px;padding:16px 20px;border-top:1px solid var(--line)}
+.chat-compose input{flex:1;min-width:0;border:1px solid var(--line);border-radius:999px;padding:13px 17px;outline:none}
+.chat-compose .btn{border-radius:999px}
+.call-setup-modal{text-align:center}
+.call-modal-icon{width:62px;height:62px;margin:4px auto 18px;display:grid;place-items:center;border-radius:50%;background:#ffe8ef;color:var(--plum);font-size:27px}
+.call-setup-status{padding:11px;background:#fff7e8;border-radius:10px;color:#8a5a12!important;font-weight:700;font-size:12px!important}
+@media(max-width:760px){.chat-shell{height:calc(100vh - 92px);min-height:560px;grid-template-columns:1fr;padding:0 10px;margin:12px auto}.chat-contacts{display:none}.chat-person{padding:13px}.call-button{padding:9px}.call-button small{display:none}.chat-messages{padding:15px}.chat-compose{padding:12px}.chat-preview-label{display:none}}
