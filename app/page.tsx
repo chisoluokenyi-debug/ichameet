@@ -5,7 +5,6 @@ import { useState } from "react";
 type Group = { name: string; description: string; privacy: string };
 
 export default function Home() {
-  const [open, setOpen] = useState(false);
   const [groupOpen, setGroupOpen] = useState(false);
   const [groupName, setGroupName] = useState("");
   const [groupDescription, setGroupDescription] = useState("");
@@ -87,19 +86,6 @@ export default function Home() {
       <section className="cta"><h2>Your story could start with hello.</h2><p>Join IchaMeet as we build a new way to make meaningful connections.</p><button className="btn btn-light" onClick={() => { window.location.href = "/signup"; }}>Get started</button></section>
 
       <footer className="site-footer"><a className="brand" href="#">icha<span>meet</span></a><span>© {new Date().getFullYear()} IchaMeet. Built for respectful connections.</span><span>Adults 18+ only</span></footer>
-
-      {open && <div className="modal-backdrop" role="presentation" onMouseDown={(e) => { if (e.target === e.currentTarget) { setOpen(false); setSubmitted(false); } }}>
-        <section className="modal" role="dialog" aria-modal="true" aria-labelledby="signup-title">
-          <button className="close" aria-label="Close" onClick={() => { setOpen(false); setSubmitted(false); }}>×</button>
-          <h2 id="signup-title">{submitted ? "Thanks for your interest!" : "Join IchaMeet"}</h2>
-          {submitted ? <p>This is an early preview. Account creation is not active yet; we are building secure sign-up and profile features next.</p> : <>
-            <p>Be among the first to explore meaningful connections. Account registration will open after secure sign-up is ready.</p>
-            <label htmlFor="email">Email address</label><input id="email" type="email" placeholder="you@example.com" autoComplete="email"/>
-            <button className="btn btn-primary" onClick={() => setSubmitted(true)}>Continue</button>
-          </>}
-        </section>
-      </div>}
-
       {groupOpen && <div className="modal-backdrop" role="presentation" onMouseDown={(e) => { if (e.target === e.currentTarget) setGroupOpen(false); }}>
         <section className="modal" role="dialog" aria-modal="true" aria-labelledby="group-title">
           <button className="close" aria-label="Close" onClick={() => setGroupOpen(false)}>×</button>
