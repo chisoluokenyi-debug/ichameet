@@ -32,8 +32,13 @@ export default function AccountPage() {
     <span className="eyebrow">Your IchaMeet account</span>
     <h1>Welcome{user.user_metadata?.display_name ? `, ${user.user_metadata.display_name}` : ""}!</h1>
     <p className="auth-intro">You are signed in as {user.email}.</p>
-    <p className="auth-notice">Your account is active. Profile setup and member discovery are the next features to connect.</p>
-    <button className="btn btn-primary auth-submit" onClick={logout}>Log out</button>
-    <Link className="auth-home" href="/">← Back to home</Link>
+    <p className="auth-notice">Your account is active. Complete your profile and explore the IchaMeet community.</p>
+    <div className="account-actions">
+      <Link className="btn btn-primary" href="/profile">Set up my profile</Link>
+      <Link className="btn btn-light" href="/groups">Explore groups</Link>
+      <Link className="btn btn-light" href="/chat">Open messages</Link>
+      <Link className="auth-home" href="/">← Back to home</Link>
+    </div>
+    <button className="btn btn-light auth-submit" onClick={logout}>Log out</button>
   </div></main>;
 }
