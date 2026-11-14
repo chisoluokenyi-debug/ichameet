@@ -26,7 +26,7 @@ export default function GroupsPage() {
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
 
-  const loadGroups = useCallback(async (uid: string) => {
+  const loadGroups = useCallback(async () => {
     const supabase = createClient();
     const { data: groupRows, error: groupError } = await supabase.from("groups").select("id,name,description,is_private,created_by,created_at").order("created_at", { ascending: false });
     if (groupError) { setError(groupError.message); setLoading(false); return; }
@@ -73,11 +73,10 @@ export default function GroupsPage() {
     supabase.auth.getUser().then(({ data, error: authError }) => {
       if (authError || !data.user) { router.replace("/signup"); return; }
       setUserId(data.user.id);
-      loadGroups(data.user.id);
+      loadGroups();
     });
   }, [router, loadGroups]);
 
-  const selectedId = useState<string>("")[0];
   const [activeId, setActiveId] = useState("");
   const selected = groups.find((g) => g.id === activeId) ?? groups[0];
   const visible = useMemo(() => groups.filter((g) => g.name.toLowerCase().includes(query.toLowerCase()) || g.description.toLowerCase().includes(query.toLowerCase())), [groups, query]);
@@ -101,7 +100,7 @@ export default function GroupsPage() {
       setActiveId(created.id);
       setName(""); setDescription(""); setPrivacy("Public"); setShowCreate(false);
     }
-    await loadGroups(userId);
+    await loadGroups();
     setSaving(false);
   }
 
