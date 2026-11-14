@@ -111,7 +111,7 @@ export default function GroupsPage() {
     const { error: joinError } = await supabase.from("group_members").insert({ group_id: group.id, user_id: userId });
     if (joinError && !joinError.message.toLowerCase().includes("duplicate")) { setError(joinError.message); return; }
     setNotice("You have joined this group.");
-    await loadGroups(userId);
+    await loadGroups();
   }
 
   async function addPost(e: FormEvent) {
@@ -121,7 +121,7 @@ export default function GroupsPage() {
     const supabase = createClient();
     const { error: postError } = await supabase.from("group_posts").insert({ group_id: selected.id, author_id: userId, content: postText.trim() });
     if (postError) setError(postError.message);
-    else { setPostText(""); setNotice("Your post has been published."); await loadGroups(userId); }
+    else { setPostText(""); setNotice("Your post has been published."); await loadGroups(); }
     setSaving(false);
   }
 
@@ -133,7 +133,7 @@ export default function GroupsPage() {
     const supabase = createClient();
     const { error: commentError } = await supabase.from("group_comments").insert({ post_id: postId, author_id: userId, content: text });
     if (commentError) setError(commentError.message);
-    else { setCommentDrafts((all) => ({ ...all, [postId]: "" })); await loadGroups(userId); }
+    else { setCommentDrafts((all) => ({ ...all, [postId]: "" })); await loadGroups(); }
   }
 
   function inviteMember(e: FormEvent) {
