@@ -10,7 +10,7 @@ type UserInfo = { email?: string; user_metadata?: { display_name?: string } };
 export default function AccountPage() {
   const router = useRouter();
   const [user, setUser] = useState<UserInfo | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);\n  const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
     const supabase = createClient();
     supabase.auth.getUser().then(({ data, error }) => {
@@ -36,7 +36,7 @@ export default function AccountPage() {
     <div className="account-actions">
       <Link className="btn btn-primary" href="/profile">Set up my profile</Link>
       <Link className="btn btn-light" href="/groups">Explore groups</Link>
-      <Link className="btn btn-light" href="/chat">Open messages</Link>
+      <Link className="btn btn-light" href="/chat">Open messages</Link>\n      <Link className="btn btn-light" href="/notifications">Notifications</Link>\n      {isAdmin && <Link className="btn btn-light" href="/admin">Admin dashboard</Link>}
       <Link className="auth-home" href="/">← Back to home</Link>
     </div>
     <button className="btn btn-light auth-submit" onClick={logout}>Log out</button>
